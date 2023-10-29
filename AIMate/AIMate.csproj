@@ -7,4 +7,19 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Core\**" />
+    <EmbeddedResource Remove="Core\**" />
+    <None Remove="Core\**" />
+    <Page Remove="Core\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Icons\" />
+    <Folder Include="Themes\" />
+    <Folder Include="MVVM\View\" />
+    <Folder Include="Core\" />
+    <Folder Include="MVVM\Model\" />
+  </ItemGroup>
+
 </Project>

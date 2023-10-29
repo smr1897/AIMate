@@ -3,10 +3,83 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AIMate"
+        xmlns:local="clr-namespace:AIMate" xmlns:viewmodel="clr-namespace:AIMate.MVVM.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Height="650" Width="1200"
+        Background="#36393f"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip"
+        >
 
+    <Window.DataContext>
+        <viewmodel:MainViewModel/>
+    </Window.DataContext>
+    
+    <Grid>
+        <Grid.RowDefinitions> <!--Setting up rows-->
+            <RowDefinition Height="25"/> <!--Title Bar-->
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions> <!--Setting up columns-->
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.ColumnSpan= "2"
+                Background= "#252525"
+                MouseDown="Border_MouseDown">
+            <!-- MouseDown is an event "Border_MouseDown" is the event handler-->
+
+            <Grid HorizontalAlignment="Stretch">
+                <Label Content="AIMate"
+                       Foreground="Gray"
+                       FontWeight="SemiBold"
+                       />
+                <StackPanel HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+
+                    <Button Width="25" Height="20"
+                            
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="Gray"
+                            Margin="0,0,0,3">
+
+                        <Image Source="/icons/minimize.png" Width="15" Height="15"/>
+
+                    </Button>
+                    
+                    <Button Width="25" Height="20"
+                            
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="Gray"
+                            Margin="0,0,0,3">
+
+                        <Image Source="/icons/maximize.png" Width="15" Height="15"/>
+
+                    </Button>
+
+                    <Button Width="25" Height="20"
+                        
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="Gray"
+                            Margin="0,0,0,3">
+                        <Image Source="/icons/close.png" Width="15" Height="15"/>
+
+                    </Button>
+
+
+                </StackPanel>    
+
+            </Grid>
+            
+        </Border>
+        
+        
+        
     </Grid>
 </Window>
