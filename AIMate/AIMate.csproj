@@ -15,7 +15,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Icons\" />
+    <None Remove="Icons\close.png" />
+    <None Remove="Icons\maximize.png" />
+    <None Remove="Icons\minimize.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Icons\close.png" />
+    <Content Include="Icons\maximize.png" />
+    <Content Include="Icons\minimize.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Themes\" />
     <Folder Include="MVVM\View\" />
     <Folder Include="Core\" />

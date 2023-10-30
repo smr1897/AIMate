@@ -15,7 +15,35 @@
     <Window.DataContext>
         <viewmodel:MainViewModel/>
     </Window.DataContext>
-    
+
+    <Window.Resources>
+        <Style x:Key="ModernButtonStyle" TargetType="Button">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="#3498DB" />
+                        <GradientStop Offset="1" Color="#206FAD" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderBrush" Value="#3498DB" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="10,5" />
+            
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" >
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions> <!--Setting up rows-->
             <RowDefinition Height="25"/> <!--Title Bar-->
@@ -45,7 +73,8 @@
                             Background="Transparent"
                             BorderThickness="0"
                             Foreground="Gray"
-                            Margin="0,0,0,3">
+                            Margin="0,0,0,3"
+                            Click="Button_Minimize_Click">
 
                         <Image Source="/icons/minimize.png" Width="15" Height="15"/>
 
@@ -56,7 +85,8 @@
                             Background="Transparent"
                             BorderThickness="0"
                             Foreground="Gray"
-                            Margin="0,0,0,3">
+                            Margin="0,0,0,3"
+                            Click="Button_Maximize_Click">
 
                         <Image Source="/icons/maximize.png" Width="15" Height="15"/>
 
@@ -67,7 +97,8 @@
                             Background="Transparent"
                             BorderThickness="0"
                             Foreground="Gray"
-                            Margin="0,0,0,3">
+                            Margin="0,0,0,3"
+                            Click="Button_Close_Click">
                         <Image Source="/icons/close.png" Width="15" Height="15"/>
 
                     </Button>
@@ -78,8 +109,49 @@
             </Grid>
             
         </Border>
-        
-        
+
+        <Grid Background="#2F3136"
+              Grid.Row="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+
+
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <Button Content="New Chat"
+                        Style="{StaticResource ModernButtonStyle}"
+                        Width="150"
+                        Height="25"
+                        Click="New_Chat_Click"
+                        />
+
+            </StackPanel>
+
+            <!-- Chat content -->
+            <ListView Name="chatListView" Grid.Row="1">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Content="Delete" Click="DeleteChatButton_Click" Width="50"/>
+                                        <TextBlock Text="{Binding Message}" Width="150"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </Grid>
         
     </Grid>
 </Window>
