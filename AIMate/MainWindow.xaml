@@ -44,33 +44,40 @@
         </Style>
     </Window.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions> <!--Setting up rows-->
-            <RowDefinition Height="25"/> <!--Title Bar-->
-            <RowDefinition/>
-            
-        </Grid.RowDefinitions>
+    <Grid x:Name="main_grid">
 
-        <Grid.ColumnDefinitions> <!--Setting up columns-->
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition/>
+        
+        
+        <Grid x:Name="main_window" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <!--Setting up rows-->
+                <RowDefinition Height="25"/>
+                <!--Title Bar-->
+                <RowDefinition/>
 
-        </Grid.ColumnDefinitions>
+            </Grid.RowDefinitions>
 
-        <Border Grid.ColumnSpan= "2"
+            <Grid.ColumnDefinitions>
+                <!--Setting up columns-->
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.ColumnSpan= "2"
                 Background= "#252525"
                 MouseDown="Border_MouseDown">
-            <!-- MouseDown is an event "Border_MouseDown" is the event handler-->
+                <!-- MouseDown is an event "Border_MouseDown" is the event handler-->
 
-            <Grid HorizontalAlignment="Stretch">
-                <Label Content="AIMate"
+                <Grid HorizontalAlignment="Stretch">
+                    <Label Content="AIMate"
                        Foreground="Gray"
                        FontWeight="SemiBold"
                        />
-                <StackPanel HorizontalAlignment="Right"
+                    <StackPanel HorizontalAlignment="Right"
                             Orientation="Horizontal">
 
-                    <Button Width="25" Height="20"
+                        <Button Width="25" Height="20"
                             
                             Background="Transparent"
                             BorderThickness="0"
@@ -78,11 +85,11 @@
                             Margin="0,0,0,3"
                             Click="Button_Minimize_Click">
 
-                        <Image Source="/icons/minimize.png" Width="15" Height="15"/>
+                            <Image Source="/icons/minimize.png" Width="15" Height="15"/>
 
-                    </Button>
-                    
-                    <Button Width="25" Height="20"
+                        </Button>
+
+                        <Button Width="25" Height="20"
                             
                             Background="Transparent"
                             BorderThickness="0"
@@ -90,99 +97,66 @@
                             Margin="0,0,0,3"
                             Click="Button_Maximize_Click">
 
-                        <Image Source="/icons/maximize.png" Width="15" Height="15"/>
+                            <Image Source="/icons/maximize.png" Width="15" Height="15"/>
 
-                    </Button>
+                        </Button>
 
-                    <Button Width="25" Height="20"
+                        <Button Width="25" Height="20"
                         
                             Background="Transparent"
                             BorderThickness="0"
                             Foreground="Gray"
                             Margin="0,0,0,3"
                             Click="Button_Close_Click">
-                        <Image Source="/icons/close.png" Width="15" Height="15"/>
+                            <Image Source="/icons/close.png" Width="15" Height="15"/>
 
-                    </Button>
+                        </Button>
 
 
-                </StackPanel>    
+                    </StackPanel>
 
-            </Grid>
-            
-        </Border>
+                </Grid>
 
-        <Grid Background="YellowGreen"
+            </Border>
+
+            <Grid Background="YellowGreen"
               Grid.Row="1">
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <RowDefinition/>
-                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
 
-            </Grid.RowDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="500"/>
-            </Grid.ColumnDefinitions>
+                </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0"
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="500"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Row="0"
                         Orientation="Horizontal"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
-                <Button Content="New Chat"
+                    <Button Content="New Chat"
                         Style="{StaticResource ModernButtonStyle}"
                         Width="150"
                         Height="25"
                         Click="New_Chat_Click"
                         />
 
-            </StackPanel>
+                </StackPanel>
 
-            <!-- Chat content -->
-            <ListView Name="chatListView" Grid.Row="1" Background="yellow">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Width="200">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button Content="Delete" Click="DeleteChatButton_Click" Width="50"/>
-                                        <TextBlock Text="{Binding Message}" Width="150"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-
-        </Grid>
-
-        <Grid Grid.Row="1"
-              Grid.Column="1"
-              Background="DarkBlue"
-            >
-
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="80"/>
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0"
-                  
-                >
-                <ListView Name="chatHistoryListView" Background="LightPink">
+                <!-- Chat content -->
+                <ListView Name="chatListView" Grid.Row="1" Background="yellow">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Width="auto" Header="Chat History">
+                            <GridViewColumn Width="200">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <StackPanel>
-                                            <TextBlock Text="{Binding UserPrompt}" FontWeight="Bold">
-                                                <TextBlock Text="{Binding ModelResponse}"/>
-                                            </TextBlock>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Content="Delete" Click="DeleteChatButton_Click" Width="50"/>
+                                            <TextBlock Text="{Binding Message}" Width="150"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -190,13 +164,46 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-                
+
             </Grid>
 
-            <Grid Grid.Row="1">
-                <StackPanel Margin="10">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <TextBox
+            <Grid Grid.Row="1"
+              Grid.Column="1"
+              Background="DarkBlue"
+            >
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0"
+                  
+                >
+                    <ListView Name="chatHistoryListView" Background="LightPink">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="auto" Header="Chat History">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding UserPrompt}" FontWeight="Bold">
+                                                <TextBlock Text="{Binding ModelResponse}"/>
+                                            </TextBlock>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <StackPanel Margin="10">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <TextBox
                             x:Name="inputTextBox"
                             Text="Enter Your Prompt Here"
                             VerticalAlignment="Center"
@@ -208,12 +215,12 @@
                             TextWrapping="Wrap"
                     
                             />
-                    </ScrollViewer>
-                    
+                        </ScrollViewer>
 
-                </StackPanel>
 
-                <Button Content="Send"
+                    </StackPanel>
+
+                    <Button Content="Send"
                         Margin="0,0,40,0"
                         Style="{StaticResource ModernButtonStyle}"
                         Width="40"
@@ -222,13 +229,18 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Right"
                     >
-                    
-                </Button>
+
+                    </Button>
+                </Grid>
+
+
             </Grid>
-            
-            
+
+
+
         </Grid>
-        
-        
+
+        <MediaElement x:Name="media" MediaEnded="MediaElement_MediaEnded" UnloadedBehavior="Manual" Stretch="Fill"/>
+
     </Grid>
 </Window>

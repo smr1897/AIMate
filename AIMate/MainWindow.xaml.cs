@@ -15,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Windows.Threading;
 
 namespace AIMate
 {
@@ -29,9 +29,15 @@ namespace AIMate
 
         private ObservableCollection<ChatHistory> chatHistory;
 
+        
+
         public MainWindow()
         {
             InitializeComponent();
+
+            media.Source = new Uri(Environment.CurrentDirectory + @"\loading.gif");
+            Loading();
+
 
             chatItems = new ObservableCollection<ChatItem>();
             chatListView.ItemsSource = chatItems;
@@ -39,6 +45,34 @@ namespace AIMate
             chatHistory = new ObservableCollection<ChatHistory>();
             chatHistoryListView.ItemsSource = chatHistory;
         }
+
+        DispatcherTimer timer = new DispatcherTimer();
+
+        private void MediaElement_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            media.Position = new TimeSpan(0, 0, 1);
+            media.Play();
+        }
+
+        private void timer_tick(object? sender, EventArgs e)
+        {
+            timer.Stop();
+            //Hide();
+            media.Visibility = Visibility.Hidden;
+            //lab.Visibility = Visibility.Hidden;
+            main_window.Visibility = Visibility.Visible;
+            //realApp win = new realApp();
+            //win.ShowDialog();
+            //Close();
+        }
+
+        void Loading()
+        {
+            timer.Tick += timer_tick;
+            timer.Interval = new TimeSpan(0, 0, 8);
+            timer.Start();
+        }
+
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -141,7 +175,7 @@ namespace AIMate
                 //Enter your api endpoint here
                 string apiUrl = "https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText?key=AIzaSyAQIGFVsiIbfDA37_hidypsrfhyN9GefKU";
 
-                //string jsonBody = $"{{\"prompt\": \"{userPrompt}\"}}";
+                
                 string jsonBody = $"{{\"prompt\": {{\"text\": \"{userPrompt}\"}}}}";
 
                 StringContent content = new StringContent(jsonBody, Encoding.UTF8, "application/json");

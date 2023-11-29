@@ -16,14 +16,22 @@
 
   <ItemGroup>
     <None Remove="Icons\close.png" />
+    <None Remove="Icons\Images\1.png" />
+    <None Remove="Icons\Images\Ai_mate_loading_screen.gif" />
+    <None Remove="Icons\Images\loading.gif" />
     <None Remove="Icons\maximize.png" />
     <None Remove="Icons\minimize.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Icons\close.png" />
+    <Content Include="Icons\Images\1.png" />
     <Content Include="Icons\maximize.png" />
     <Content Include="Icons\minimize.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\Images\loading.gif" />
   </ItemGroup>
 
   <ItemGroup>
