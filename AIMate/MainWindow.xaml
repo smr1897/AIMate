@@ -48,11 +48,13 @@
         <Grid.RowDefinitions> <!--Setting up rows-->
             <RowDefinition Height="25"/> <!--Title Bar-->
             <RowDefinition/>
+            
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions> <!--Setting up columns-->
             <ColumnDefinition Width="200"/>
-            <ColumnDefinition />
+            <ColumnDefinition/>
+
         </Grid.ColumnDefinitions>
 
         <Border Grid.ColumnSpan= "2"
@@ -110,15 +112,20 @@
             
         </Border>
 
-        <Grid Background="#2F3136"
+        <Grid Background="YellowGreen"
               Grid.Row="1">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition/>
-
+                
 
             </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="500"/>
+            </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Row="0"
                         Orientation="Horizontal"
@@ -134,7 +141,7 @@
             </StackPanel>
 
             <!-- Chat content -->
-            <ListView Name="chatListView" Grid.Row="1">
+            <ListView Name="chatListView" Grid.Row="1" Background="yellow">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="200">
@@ -152,6 +159,76 @@
             </ListView>
 
         </Grid>
+
+        <Grid Grid.Row="1"
+              Grid.Column="1"
+              Background="DarkBlue"
+            >
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"
+                  
+                >
+                <ListView Name="chatHistoryListView" Background="LightPink">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="auto" Header="Chat History">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding UserPrompt}" FontWeight="Bold">
+                                                <TextBlock Text="{Binding ModelResponse}"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <StackPanel Margin="10">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <TextBox
+                            x:Name="inputTextBox"
+                            Text="Enter Your Prompt Here"
+                            VerticalAlignment="Center"
+                            Width="800"
+                            Height="40"
+                            Margin="0,10,10,0"
+                            GotFocus="InputTextBox_GotFocus"
+                            LostFocus="InputTextBox_LostFocus"
+                            TextWrapping="Wrap"
+                    
+                            />
+                    </ScrollViewer>
+                    
+
+                </StackPanel>
+
+                <Button Content="Send"
+                        Margin="0,0,40,0"
+                        Style="{StaticResource ModernButtonStyle}"
+                        Width="40"
+                        Height="40"
+                        Click="SendButton_Click"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                    >
+                    
+                </Button>
+            </Grid>
+            
+            
+        </Grid>
+        
         
     </Grid>
 </Window>
