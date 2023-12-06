@@ -48,7 +48,7 @@
 
         
         
-        <Grid x:Name="main_window" Visibility="Collapsed">
+        <Grid x:Name="main_window" Visibility="Visible">
             <Grid.RowDefinitions>
                 <!--Setting up rows-->
                 <RowDefinition Height="25"/>
@@ -81,7 +81,7 @@
                             
                             Background="Transparent"
                             BorderThickness="0"
-                            Foreground="Gray"
+                            Foreground="white"
                             Margin="0,0,0,3"
                             Click="Button_Minimize_Click">
 

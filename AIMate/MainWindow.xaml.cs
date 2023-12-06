@@ -16,9 +16,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Newtonsoft.Json;
+using System.Text.Json;
+using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 
 namespace AIMate
 {
+   
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -155,9 +161,13 @@ namespace AIMate
 
                 //Sending user's prompt to the api endpoint
                 string palmApiResponse = await callPalmApiEndpoint(userPrompt);
+                var data = (JObject)JsonConvert.DeserializeObject(palmApiResponse);
+                //Console.WriteLine(data);
+                string output = " "+data["candidates"][0]["output"].Value<string>();
+                //string output = root.GetProperty("candidates")[0].GetProperty("output").GetString();
 
                 //process the api responce here
-                chatHistory.Add(new ChatHistory { UserPrompt = userPrompt , ModelResponse = palmApiResponse });
+                chatHistory.Add(new ChatHistory { UserPrompt = userPrompt , ModelResponse = output });
 
                 //Clear the inputTextBox
                 inputTextBox.Text = "Enter Your Prompt Here";
