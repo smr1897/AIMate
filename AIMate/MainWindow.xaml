@@ -199,9 +199,20 @@
                     </ListView>
 
                 </Grid>
+                
+                <!--Initial Message-->
+                <TextBlock x:Name="initialMessageTextBlock"
+                           Text="How can I assist you today ?"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontWeight="Bold"
+                           FontSize="18"
+                           Foreground="white"
+                           Visibility="Visible"
+                           />
 
                 <Grid Grid.Row="1">
-                    <StackPanel Margin="10">
+                    <StackPanel Grid.Row="1" Visibility="visible" Margin="10">
                         <ScrollViewer VerticalScrollBarVisibility="Auto">
                             <TextBox
                             x:Name="inputTextBox"

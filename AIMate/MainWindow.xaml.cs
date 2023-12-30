@@ -112,6 +112,9 @@ namespace AIMate
 
         private void New_Chat_Click(object sender, RoutedEventArgs e)
         {
+            inputTextBox.Visibility = Visibility.Visible;
+            initialMessageTextBlock.Visibility = Visibility.Collapsed;
+
             //Create a new chat item and add it to the ObservableCollection
             chatItems.Insert(0, new ChatItem { Message = "New Chat Message"});
 
@@ -127,6 +130,23 @@ namespace AIMate
             if (chatItem != null) 
             {
                 chatItems.Remove(chatItem);
+
+                if(chatItems.Count == 0)
+                {
+                    inputTextBox.Visibility = Visibility.Collapsed;
+                    initialMessageTextBlock.Visibility= Visibility.Visible;
+                }
+            }
+
+            var correspondingChatHistory = chatHistory.FirstOrDefault(item => item.UserPrompt == chatItem.Message);
+            if(correspondingChatHistory != null) 
+            {
+                chatHistory.Remove(correspondingChatHistory);
+            }
+
+            if(chatItems.Count > 0)
+            {
+                chatListView.ScrollIntoView(chatItems[chatItems.Count - 1]);
             }
         }
 
@@ -183,7 +203,7 @@ namespace AIMate
             using (HttpClient client = new HttpClient()) 
             {
                 //Enter your api endpoint here
-                string apiUrl = "https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText?key=AIzaSyAQIGFVsiIbfDA37_hidypsrfhyN9GefKU";
+                string apiUrl = "";
 
                 
                 string jsonBody = $"{{\"prompt\": {{\"text\": \"{userPrompt}\"}}}}";
